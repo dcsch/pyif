@@ -1,11 +1,11 @@
 
-#from . import parser
-#from . import action
-#from . import grammar
-#from . import glk
-#from .debug import log
+from . import parser
+from . import action
+from . import grammar
+from . import glk
+from .debug import log
 
-from . import *
+#from . import *
 
 #####################################################################
 # 'Constant' values

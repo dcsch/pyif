@@ -2,14 +2,14 @@
 # Default verb actions
 
 #from . import thing
-#from . import glk
-#from . import message
-#from .debug import log
+from . import glk
+from . import message
+from .debug import log
 #from types import *
 
-#from . import CLOTHING, CONTAINER, LIGHT, OPEN, SCENERY, SUPPORTER, TRANSPARENT, VISITED, WORN
+from . import CLOTHING, CONTAINER, LIGHT, OPEN, SCENERY, SUPPORTER, TRANSPARENT, VISITED, WORN
 
-from . import *
+#from . import *
 
 def before_actions(story):
 

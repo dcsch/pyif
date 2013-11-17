@@ -1,10 +1,10 @@
 
 #from . import action
-#from . import glk
+from . import glk
 #from . import message
-#from .debug import log
+from .debug import log
 
-from . import *
+#from . import *
 
 NOUN_TOKEN        = 1
 HELD_TOKEN        = 2

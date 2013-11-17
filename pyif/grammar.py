@@ -1,9 +1,9 @@
 
-#from . import action
-#from .parser import NOUN_TOKEN, HELD_TOKEN, MULTI_TOKEN, MULTIHELD_TOKEN, MULTIEXCEPT_TOKEN, MULTIINSIDE_TOKEN, TOPIC_TOKEN, CREATURE_TOKEN
-#from .debug import log
+from . import action
+from .parser import NOUN_TOKEN, HELD_TOKEN, MULTI_TOKEN, MULTIHELD_TOKEN, MULTIEXCEPT_TOKEN, MULTIINSIDE_TOKEN, TOPIC_TOKEN, CREATURE_TOKEN
+from .debug import log
 
-from . import *
+#from . import *
 
 class Verb:
 

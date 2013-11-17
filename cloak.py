@@ -3,13 +3,14 @@
 # Python version, using PyIF, written by David Schweinsberg
 ###############################################################################
 
-#from pyif import thing
-#from pyif import parser
-#from pyif import action
-#from pyif import util
-#from pyif import glk
+#from pyif import grammar
+from pyif import thing
+from pyif import parser
+from pyif import action
+from pyif import util
+from pyif import glk
 
-from pyif import *
+#from pyif import *
 
 class Delegate:
 
