@@ -1,15 +1,13 @@
 
 # Default verb actions
 
-#from . import thing
+from . import thing
 from . import glk
 from . import message
 from .debug import log
 #from types import *
 
 from . import CLOTHING, CONTAINER, LIGHT, OPEN, SCENERY, SUPPORTER, TRANSPARENT, VISITED, WORN
-
-#from . import *
 
 def before_actions(story):
 
@@ -191,10 +189,7 @@ def examine(story):
     elif isinstance(story.nouns[0].description, FunctionType):
         story.nouns[0].description(story.nouns[0])
 
-def exit(story):
-    pass
-
-def fill(story):
+def exit_(story):
     pass
 
 def fill(story):
@@ -254,10 +249,10 @@ def look(story, implicit_look=False):
         room.attributes.add(VISITED)
         
         # What objects can be seen here?
-        str = content_description(story, room)
-        if len(str):
+        s = content_description(story, room)
+        if len(s):
             glk.put_char("\n")
-            glk.put_string(message.CAN_SEE % str)
+            glk.put_string(message.CAN_SEE % s)
 
     else:
         # There is an issue here with the VISITED attribute.  Ideally, we should only see the
@@ -277,29 +272,29 @@ def content_description(story, container):
             continue
         seen.append(obj)
     count = len(seen)
-    str = ""
+    s = ""
     if count > 0:
         for obj in seen:
-            str += "%s %s" % (obj.article, obj.name)
+            s += "%s %s" % (obj.article, obj.name)
             
             if LIGHT in obj.attributes:
-                str += " (" + message.PROVIDING_LIGHT + ")"
+                s += " (" + message.PROVIDING_LIGHT + ")"
             
             if CONTAINER in obj.attributes:
                 if OPEN in obj.attributes or TRANSPARENT in obj.attributes:
                     str2 = content_description(story, obj)
                     if len(str2):
-                        str += " (" + message.IN_WHICH + str2 + ")"
+                        s += " (" + message.IN_WHICH + str2 + ")"
             elif SUPPORTER in obj.attributes:
                 str2 = content_description(story, obj)
                 if len(str2):
-                    str += " (" + message.ON_WHICH + str2 + ")"
+                    s += " (" + message.ON_WHICH + str2 + ")"
             count -= 1
             if count > 1:
-                str += ", "
+                s += ", "
             elif count > 0:
-                str += message.AND
-    return str
+                s += message.AND
+    return s
 
 def mild(story):
     pass
@@ -371,7 +366,7 @@ def vague_go(story):
 def search(story):
     "Search an item.  If a supporter or container, display the list of contents."
 
-    room = story.actor.room()
+    #room = story.actor.room()
 
     if before_actions(story):
         return
@@ -381,13 +376,13 @@ def search(story):
         glk.put_string(message.TOO_DARK)
         return
 
-    str = content_description(story, story.nouns[0])
-    if len(str):
+    s = content_description(story, story.nouns[0])
+    if len(s):
         if CONTAINER in story.nouns[0].attributes:
             glk.put_string(message.IN)
         elif SUPPORTER in story.nouns[0].attributes:
             glk.put_string(message.ON)
-        glk.put_string("the %s is %s.\n" % (story.nouns[0].name, str))
+        glk.put_string("the %s is %s.\n" % (story.nouns[0].name, s))
     else:
         glk.put_string("You find nothing of interest.\n")
 

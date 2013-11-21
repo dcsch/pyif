@@ -1,6 +1,6 @@
 
 import curses
-from . import util
+#from . import util
 
 # Constants
 
@@ -28,8 +28,8 @@ line_history = []
 
 class Event:
     
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, event_type):
+        self.event_type = event_type
         self.win = None
         self.val1 = 0
         self.val2 = 0
@@ -80,12 +80,12 @@ def set_style(style):
     stdscr.attrset(attr)
 
 def get_string():
-    str = ""
+    s = ""
     pos = 0
     anchor = stdscr.getyx()
 
     global line_history
-    line_history.append(str)
+    line_history.append(s)
     line_history_pos = len(line_history) - 1
 
     while True:
@@ -94,7 +94,7 @@ def get_string():
         if c == 10:
         
             # Return / Linefeed
-            stdscr.addch(anchor[0], anchor[1] + len(str), 60)
+            stdscr.addch(anchor[0], anchor[1] + len(s), 60)
             stdscr.addch(c)
             break
 
@@ -103,10 +103,10 @@ def get_string():
             # Delete
             if pos:
                 pos -= 1
-                str = str[:pos] + str[pos + 1:]
+                s = s[:pos] + s[pos + 1:]
                 stdscr.move(anchor[0], anchor[1])
                 stdscr.clrtobot()
-                stdscr.addstr(anchor[0], anchor[1], str)
+                stdscr.addstr(anchor[0], anchor[1], s)
                 stdscr.move(anchor[0], anchor[1] + pos)
                 
         elif c == curses.KEY_LEFT:
@@ -117,7 +117,7 @@ def get_string():
 
         elif c == curses.KEY_RIGHT:
         
-            if pos < len(str):
+            if pos < len(s):
                 pos += 1
                 stdscr.move(anchor[0], anchor[1] + pos)
 
@@ -125,35 +125,35 @@ def get_string():
         
             if line_history_pos:
                 line_history_pos -= 1
-                str = line_history[line_history_pos]
-                pos = len(str)
+                s = line_history[line_history_pos]
+                pos = len(s)
                 stdscr.move(anchor[0], anchor[1])
                 stdscr.clrtobot()
-                stdscr.addstr(anchor[0], anchor[1], str)
+                stdscr.addstr(anchor[0], anchor[1], s)
                 stdscr.move(anchor[0], anchor[1] + pos)
 
         elif c == curses.KEY_DOWN:
         
             if line_history_pos < len(line_history) - 1:
                 line_history_pos += 1
-                str = line_history[line_history_pos]
-                pos = len(str)
+                s = line_history[line_history_pos]
+                pos = len(s)
                 stdscr.move(anchor[0], anchor[1])
                 stdscr.clrtobot()
-                stdscr.addstr(anchor[0], anchor[1], str)
+                stdscr.addstr(anchor[0], anchor[1], s)
                 stdscr.move(anchor[0], anchor[1] + pos)
 
         elif c < curses.KEY_MIN:
         
             # Treat this as a printable character
-            str = str[:pos] + "%c" % c + str[pos:]
+            s = s[:pos] + "%c" % c + s[pos:]
             pos += 1
-            stdscr.addstr(anchor[0], anchor[1], str)
+            stdscr.addstr(anchor[0], anchor[1], s)
             stdscr.move(anchor[0], anchor[1] + pos)
 
             # Set the line history
             line_history = line_history[:-1]
-            line_history.append(str)
+            line_history.append(s)
     
             # Debugging
             #stdscr.addstr(50, 0, "%s" % line_history)
@@ -161,6 +161,6 @@ def get_string():
 
     # Update the line history
     line_history = line_history[:-1]
-    line_history.append(str)
+    line_history.append(s)
 
-    return str
+    return s

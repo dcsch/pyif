@@ -3,8 +3,6 @@ from . import action
 from .parser import NOUN_TOKEN, HELD_TOKEN, MULTI_TOKEN, MULTIHELD_TOKEN, MULTIEXCEPT_TOKEN, MULTIINSIDE_TOKEN, TOPIC_TOKEN, CREATURE_TOKEN
 from .debug import log
 
-#from . import *
-
 class Verb:
 
     def __init__(self, grammar, verb_tokens):
@@ -197,16 +195,16 @@ class Grammar:
         verb.add_action([NOUN_TOKEN], action.examine)
 
         verb = self.add_verb(["exit", "out", "outside"])
-        verb.add_action([], action.exit)
-        verb.add_action([NOUN_TOKEN], action.exit)
+        verb.add_action([], action.exit_)
+        verb.add_action([NOUN_TOKEN], action.exit_)
 
         verb = self.add_verb(["fill"])
         verb.add_action([NOUN_TOKEN], action.fill)
         
         verb = self.add_verb(["get"])
-        verb.add_action(["out"], action.exit)
-        verb.add_action(["off"], action.exit)
-        verb.add_action(["up"], action.exit)
+        verb.add_action(["out"], action.exit_)
+        verb.add_action(["off"], action.exit_)
+        verb.add_action(["up"], action.exit_)
         verb.add_action([MULTI_TOKEN], action.take)
         verb.add_action(["in", NOUN_TOKEN], action.enter)
         verb.add_action(["into", NOUN_TOKEN], action.enter)

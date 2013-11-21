@@ -3,14 +3,12 @@
 # Python version, using PyIF, written by David Schweinsberg
 ###############################################################################
 
-#from pyif import grammar
+from pyif.story import Story
 from pyif import thing
 from pyif import parser
 from pyif import action
 from pyif import util
 from pyif import glk
-
-#from pyif import *
 
 class Delegate:
 
@@ -28,7 +26,7 @@ people about but, hey, what do you expect in a cheap demo game...?\n\n\n")
             return True
         return False
     
-story = thing.Story("Cloak of Darkness", "A basic IF demonstration.", Delegate())
+story = Story("Cloak of Darkness", "A basic IF demonstration.", Delegate())
 
 ###############################################################################
 # Rooms

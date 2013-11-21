@@ -1,7 +1,7 @@
 
 #from . import action
 from . import glk
-#from . import message
+from . import message
 from .debug import log
 
 #from . import *

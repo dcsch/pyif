@@ -4,7 +4,7 @@ def is_whitespace(c):
         return True
     return False
 
-def compress_whitespace(str):
+def compress_whitespace(s):
     """
     Remove extraneous whitespace from the string, that being all whitespace at the beginning
     and end of the string and anything beyond a single space within the string.
@@ -12,8 +12,8 @@ def compress_whitespace(str):
     
     new_str = ""
     in_text = False
-    for i in range(len(str)):
-        c = str[i]
+    for i in range(len(s)):
+        c = s[i]
         if is_whitespace(c):
             if not in_text:
 
@@ -32,10 +32,10 @@ def compress_whitespace(str):
         new_str = new_str[:-1]
     return new_str
 
-def cw(str):
-    return compress_whitespace(str)
+def cw(s):
+    return compress_whitespace(s)
 
-def insert_newlines(str, width):
+def insert_newlines(s, width):
     """
     Insert newlines into the string so words don't wrap at the end of lines.
     """
@@ -45,16 +45,16 @@ def insert_newlines(str, width):
     # Jump to the end of a line and scan backwards for whitespace
     start = 0
     pos = width
-    while pos < len(str):
+    while pos < len(s):
         for i in range(pos, pos - width, -1):
-            if is_whitespace(str[i]):
+            if is_whitespace(s[i]):
                 for j in range(i - 1, pos - width, -1):
-                    if not is_whitespace(str[j]):
+                    if not is_whitespace(s[j]):
                         i = j + 1
-                new_str += str[start:i + 1] + "\n"
+                new_str += s[start:i + 1] + "\n"
                 start = i + 1
                 pos += width
                 break
-    if start < len(str):
-        new_str += str[start:]
+    if start < len(s):
+        new_str += s[start:]
     return new_str

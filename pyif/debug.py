@@ -1,5 +1,5 @@
 
-import sys
+#import sys
 from . import glk
 
 def log(string):
